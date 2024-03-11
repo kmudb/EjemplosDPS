@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text,SafeAreaView, TouchableOpacity, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text,Alert,SafeAreaView, TouchableOpacity, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -12,7 +12,19 @@ const App = () => {
     retrieveData();
   }, []);
 
+  const isValidName = (name) => /^[A-Za-z\s]+$/.test(name);
+  const isValidAge = (age) => /^\d+$/.test(age);
+
   const storeData = async () => {
+    if (!isValidName(nameInput)) {
+      Alert.alert('Error', 'Nombre inválido. Debe contener solo letras y espacios.');
+      return;
+    }
+
+    if (!isValidAge(ageInput)) {
+      Alert.alert('Error', 'Edad inválida. Debe contener solo números.');
+      return;
+    }
     try {
       const existingData = await AsyncStorage.getItem('@myApp:peopleList');
       const existingPeopleList = existingData ? JSON.parse(existingData) : [];
@@ -108,6 +120,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     padding: 8,
     marginTop: 58,
+    marginLeft: 10,
+    marginRight: 10,
+
   },
   formGroup: {
     marginBottom: 20,
