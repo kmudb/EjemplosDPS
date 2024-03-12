@@ -1,6 +1,6 @@
 import  {useEffect, useState } from 'react';
 import { View,Alert,  TextInput, Button, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Formulario = ({ navigation }) => {
   const [peopleList, setPeopleList] = useState([]);
