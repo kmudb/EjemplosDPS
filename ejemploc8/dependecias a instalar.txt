@@ -1,0 +1,8 @@
+react-native-screens 
+react-native-reanimated 
+@react-navigation/drawer 
+@react-navigation/native 
+react-native-vector-icons 
+react-native-gesture-handler 
+@react-navigation/bottom-tabs 
+react-native-safe-area-context
