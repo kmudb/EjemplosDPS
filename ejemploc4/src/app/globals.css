@@ -140,6 +140,13 @@ button, input, optgroup, select, textarea
   background-color: #007bff;
   border-color: #007bff;
 }
+
+.error {
+  color: red;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
 .btn
 {
   display: inline-block;
