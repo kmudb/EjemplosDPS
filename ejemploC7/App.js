@@ -1,20 +1,19 @@
-import React from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Formulario from './components/Formulario';
-import MostrarDatos from './components/MostrarDatos';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ListaPersona from './listaPersona';
+import agregarPersona from './agregarPersona';
 
-const Stack = createStackNavigator();
 
-const App = () => {
+const stack = createNativeStackNavigator();
+export default function App() {
+ 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Formulario">
-        <Stack.Screen name="Formulario" component={Formulario} />
-        <Stack.Screen name="MostrarDatos" component={MostrarDatos} />
-      </Stack.Navigator>
+      <stack.Navigator initialRouteName="Lista">
+        <stack.Screen name="Lista" component={ListaPersona} options={{title:'Lista de personas'}}/>
+        <stack.Screen name="Agregar" component={agregarPersona} options={{title:'Agregar personas'}}/>
+      </stack.Navigator>
     </NavigationContainer>
   );
 };
-
-export default App;

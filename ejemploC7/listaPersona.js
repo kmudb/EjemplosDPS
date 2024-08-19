@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Button, FlatList, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
-const MostrarDatos = () => {
- const [peopleList, setPeopleList] = useState([]);
+export default function ListaPersona({ navigation  }) {
+  const [peopleList, setPeopleList] = useState([]);
+
+ // Utiliza useFocusEffect para recargar los datos cuando la pantalla gana enfoque
+ useFocusEffect(
+    React.useCallback(() => {
+      retrieveData();
+    }, [])
+  );
 
 
-  useEffect(() => {
-    retrieveData();
-  }, []);
-
- const retrieveData = async () => {
+  const retrieveData = async () => {
     try {
       const data = await AsyncStorage.getItem('@myApp:peopleList');
       if (data !== null) {
@@ -26,13 +30,9 @@ const MostrarDatos = () => {
     try {
       const updatedPeopleList = [...peopleList];
       updatedPeopleList.splice(index, 1);
-
       await AsyncStorage.setItem('@myApp:peopleList', JSON.stringify(updatedPeopleList));
-
       setPeopleList(updatedPeopleList);
-    } catch (error) {
-      console.error('Error al eliminar persona:', error);
-    }
+    } catch (error) {      console.error('Error al eliminar persona:', error);    }
   };
 
   const renderItem = ({ item, index }) => (
@@ -46,44 +46,45 @@ const MostrarDatos = () => {
       </TouchableOpacity>
     </View>
   );
-
   return (
-    <FlatList
+    <SafeAreaView style={styles.container}>
+      <View style={styles.buttonContainer}>
+       <Button title="Agregar persona" onPress={() => navigation.navigate('Agregar')} />
+       </View>
+      <FlatList
         data={peopleList}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
+    </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
     padding: 8,
-    marginTop: 58,
+    marginTop: 58,  
     marginLeft: 10,
-    marginRight: 10,
-
-  },
+    marginRight:10  },
+  formGroup: {
+    marginBottom: 20,  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,  },
+  buttonContainer: {
+    marginTop: 20,  },
   personContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
-  },
+    marginBottom: 10,  },
   person:{
-    flexDirection: 'column',
-  },
+    flexDirection: 'column',  },
   personText: {
-    fontSize: 16,
-  },
+    fontSize: 16,  },
   personText2: {
     fontSize: 13,
-    color:'grey'
-  },
-});
-
-export default MostrarDatos;
-a
+    color:'grey'  },});
