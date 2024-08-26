@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ejemploc8",
-    "slug": "snack-cc2fbe93-3cfd-4a43-b9fa-3b4b75dbd626",
+    "name": "navegacion",
+    "slug": "navegacion",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,9 +11,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "supportsTablet": true
     },
@@ -25,7 +22,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "description": "ejemplo de navegacion tab y drawer\n"
+    }
   }
 }
