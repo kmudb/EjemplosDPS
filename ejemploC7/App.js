@@ -1,19 +1,20 @@
-
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ListaPersona from './listaPersona';
-import agregarPersona from './agregarPersona';
+import { createStackNavigator } from '@react-navigation/stack';
+import Formulario from './components/Formulario';
+import MostrarDatos from './components/MostrarDatos';
 
+const Stack = createStackNavigator();
 
-const stack = createNativeStackNavigator();
 export default function App() {
- 
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName="Lista">
-        <stack.Screen name="Lista" component={ListaPersona} options={{title:'Lista de personas'}}/>
-        <stack.Screen name="Agregar" component={agregarPersona} options={{title:'Agregar personas'}}/>
-      </stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator initialRouteName="Formulario">
+      <Stack.Screen name="Formulario" component={Formulario} />
+      <Stack.Screen name="MostrarDatos" component={MostrarDatos} />
+    </Stack.Navigator>
+  </NavigationContainer>
   );
-};
+}
+
